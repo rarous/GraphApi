@@ -45,6 +45,7 @@
     <Compile Include="ClientAuth.cs" />
     <Compile Include="ClientAuthException.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="GraphFactory.cs" />
     <Compile Include="HttpVerb.cs" />
     <Compile Include="IAuthentication.cs" />
     <Compile Include="OAuth.cs" />
