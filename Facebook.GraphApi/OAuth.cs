@@ -28,11 +28,11 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
-    public string Authorize() {
-      return Authorize(null);
+    public string GetAccessToken() {
+      return GetAccessToken(null);
     }
 
-    public string Authorize(string redirectUrl) {
+    public string GetAccessToken(string redirectUrl) {
 
       if (String.IsNullOrEmpty(redirectUrl)) {
         redirectUrl = httpContext.Request.Url.ToString();

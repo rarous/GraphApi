@@ -6,7 +6,7 @@ namespace Facebook.GraphApi {
   public class ClientAuth : IAuthentication {
 
     const string AccessTokenKey = "\"access_token";
-    private const string FacebookCookiePrefix = "fbs_";
+    const string FacebookCookiePrefix = "fbs_";
 
     readonly string clientId;
     readonly HttpContextBase httpContext;
@@ -21,7 +21,7 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
-    public string Authorize() {
+    public string GetAccessToken() {
 
       if (httpContext == null) {
         throw new ClientAuthException("Client authentication can be used only on web applications.");
