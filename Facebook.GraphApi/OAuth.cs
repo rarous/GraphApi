@@ -13,7 +13,6 @@ namespace Facebook.GraphApi {
     const string ClientIdKey = "client_id";
     const string ClientSecretKey = "client_secret";
     const string CodeKey = "code";
-    const string ErrorToken = "error";
     const string GrantTypeKey = "grant_type";
     const string RedirectUriKey = "redirect_uri";
     const string ResponseTypeKey = "response_type";
@@ -77,14 +76,10 @@ namespace Facebook.GraphApi {
       };
 
       var response = AccessTokenUrl.ToUri().
-        MakeJsonRequest(HttpVerb.Get, args);
+        MakeJsonRequest(HttpVerb.Get, args).
+        HandleError();
 
-      var error = response[ErrorToken];
-      if (error != null) {
-        throw new OAuthException(error.Value<string>("message"));
-      }
-
-      return response.Value<string>(AccessToken);
+      return response[AccessToken].ToString();
     }
   }
 }
