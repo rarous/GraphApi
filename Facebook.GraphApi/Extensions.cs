@@ -69,13 +69,25 @@ namespace Facebook.GraphApi {
     }
 
     public static string ReadResponse(this HttpWebRequest request) {
-      // TODO: async
-      using (var response = request.GetResponse())
+
+      request.AllowAutoRedirect = true;
+      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+      using (var response = GetResponse(request))
       using (var reader = new StreamReader(response.GetResponseStream())) {
         return reader.ReadToEnd();
       }
     }
 
+    private static WebResponse GetResponse(HttpWebRequest request) {
+      try {
+        // TODO: async
+        return request.GetResponse();
+      }
+      catch (WebException ex) {
+        return ex.Response;
+      }
+    }
     public static string ToQueryString(this IDictionary<string, object> parameters) {
       return parameters.
         Select(NameValuePair).

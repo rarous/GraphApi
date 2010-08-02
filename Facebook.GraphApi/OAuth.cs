@@ -1,14 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using Newtonsoft.Json.Linq;
 
 namespace Facebook.GraphApi {
 
-  public class OAuth {
+  public class OAuth : IAuthentication {
 
-    const string AuthorizeUrl = "https://graph.facebook.com/oauth/authorize";
+    const string AccessToken = "access_token";
     const string AccessTokenUrl = "https://graph.facebook.com/oauth/access_token";
+    const string AuthorizationCode = "authorization_code";
+    const string AuthorizeUrl = "https://graph.facebook.com/oauth/authorize";
+    const string ClientIdKey = "client_id";
+    const string ClientSecretKey = "client_secret";
+    const string CodeKey = "code";
+    const string ErrorToken = "error";
+    const string GrantTypeKey = "grant_type";
+    const string RedirectUriKey = "redirect_uri";
+    const string ResponseTypeKey = "response_type";
 
     readonly string clientId;
     readonly string clientSecret;
@@ -20,7 +28,12 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
+    public string Authorize() {
+      return Authorize(null);
+    }
+
     public string Authorize(string redirectUrl) {
+
       if (String.IsNullOrEmpty(redirectUrl)) {
         redirectUrl = httpContext.Request.Url.ToString();
       }
@@ -31,20 +44,22 @@ namespace Facebook.GraphApi {
     }
 
     private string GetAuthorizationCode(string redirectUrl) {
-      var code = httpContext.Request["code"];
+
+      var code = httpContext.Request[CodeKey];
       if (String.IsNullOrEmpty(code)) {
         RequestAuthorizationCode(redirectUrl);
       }
+
       return code;
     }
 
     private void RequestAuthorizationCode(string redirectUrl) {
 
       var args = new Dictionary<string, object> {
-				{ "response_type", "code" },
-				{ "client_id", clientId },
-				{ "redirect_url", redirectUrl },
-			};
+        { ResponseTypeKey, CodeKey },
+        { ClientIdKey, clientId },
+        { RedirectUriKey, redirectUrl },
+      };
 
       var requestUrl = AuthorizeUrl.ToUri(args);
 
@@ -54,22 +69,22 @@ namespace Facebook.GraphApi {
     private string GetAccessToken(string code, string redirectUrl) {
 
       var args = new Dictionary<string, object> {
-				{ "grant_type", "authorization_code" },
-				{ "client_id", clientId },
-				{ "client_secret", clientSecret },
-				{ "code", code },
-				{ "redirect_url", redirectUrl },
-			};
+        { GrantTypeKey, AuthorizationCode },
+        { ClientIdKey, clientId },
+        { ClientSecretKey, clientSecret },
+        { CodeKey, code },
+        { RedirectUriKey, redirectUrl },
+      };
 
       var response = AccessTokenUrl.ToUri().
         MakeJsonRequest(HttpVerb.Get, args);
 
-      JToken error;
-      if (response.TryGetValue("error", out error)) {
-        throw new OAuthException(error.Value<string>());
+      var error = response[ErrorToken];
+      if (error != null) {
+        throw new OAuthException(error.Value<string>("message"));
       }
 
-      return response.Value<string>("access_token");
+      return response.Value<string>(AccessToken);
     }
   }
 }
