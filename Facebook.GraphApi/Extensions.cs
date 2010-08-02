@@ -13,7 +13,7 @@ namespace Facebook.GraphApi {
     private const string FormUrlEncoded = "application/x-www-form-urlencoded";
 
     public static JObject MakeJsonRequest(this Uri url, HttpVerb httpVerb, IDictionary<string, object> args) {
-      
+
       string response = url.MakeRequest(httpVerb, args);
 
       return JObject.Parse(response);
@@ -39,7 +39,7 @@ namespace Facebook.GraphApi {
       }
     }
 
-    private static Uri AppendGetParameters(Uri url, IDictionary<string, object> args) {
+    private static Uri AppendGetParameters(this Uri url, IDictionary<string, object> args) {
 
       if (args.Keys.Any()) {
         return new Uri(String.Concat(url, "?", args.ToQueryString()));
@@ -62,12 +62,14 @@ namespace Facebook.GraphApi {
       request.ContentType = FormUrlEncoded;
       request.ContentLength = postDataBytes.Length;
 
+      // TODO: async
       using (var requestStream = request.GetRequestStream()) {
         requestStream.Write(postDataBytes, 0, postDataBytes.Length);
       }
     }
 
     public static string ReadResponse(this HttpWebRequest request) {
+      // TODO: async
       using (var response = request.GetResponse())
       using (var reader = new StreamReader(response.GetResponseStream())) {
         return reader.ReadToEnd();
@@ -88,6 +90,14 @@ namespace Facebook.GraphApi {
     private static string JoinPairs(string acc, string item) {
       const string pairsSeparator = "&";
       return String.Concat(acc, pairsSeparator, item);
+    }
+
+    public static Uri ToUri(this string url) {
+      return new Uri(url);
+    }
+
+    public static Uri ToUri(this string url, IDictionary<string, object> args) {
+      return AppendGetParameters(url.ToUri(), args);
     }
   }
 }

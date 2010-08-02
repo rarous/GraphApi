@@ -116,7 +116,7 @@ namespace Facebook.GraphApi {
     }
 
     static string GetErrorMessage(JObject json) {
-      return json[ErrorKey][MessageKey].ToString();
+      return json[ErrorKey][MessageKey].Value<string>();
     }
   }
 }
