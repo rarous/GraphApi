@@ -7,6 +7,7 @@ namespace Facebook.GraphApi {
 
     const string AccessTokenKey = "\"access_token";
     const string FacebookCookiePrefix = "fbs_";
+    const string UidKey = "uid";
 
     readonly string clientId;
     readonly HttpContextBase httpContext;
@@ -17,30 +18,40 @@ namespace Facebook.GraphApi {
     /// <param name="clientId"></param>
     /// <param name="httpContext"></param>
     public ClientAuth(string clientId, HttpContextBase httpContext) {
+
+      if (httpContext == null) {
+        throw new ClientAuthException("Client authentication can be used only on web applications.");
+      }
+
       this.clientId = clientId;
       this.httpContext = httpContext;
     }
 
     public string GetAccessToken() {
 
-      if (httpContext == null) {
-        throw new ClientAuthException("Client authentication can be used only on web applications.");
-      }
-
-      HttpCookie fbCookie = GetFacebookCookie();
-      if (fbCookie == null) {
-        throw new ClientAuthException("Can not find user cookie.");
-      }
+      var fbCookie = GetFacebookCookie();
 
       return fbCookie[AccessTokenKey];
     }
 
+    public long GetUserId() {
+
+      var fbCookie = GetFacebookCookie();
+
+      return Int64.Parse(fbCookie[UidKey]);
+    }
+
     private HttpCookie GetFacebookCookie() {
 
-      HttpRequestBase request = httpContext.Request;
       string cookieName = FacebookCookiePrefix + clientId;
+      HttpRequestBase request = httpContext.Request;
+      HttpCookie cookie = request.Cookies[cookieName];
 
-      return request.Cookies[cookieName];
+      if (cookie == null) {
+        throw new ClientAuthException("Can not find user cookie.");
+      }
+
+      return cookie;
     }
   }
 }
