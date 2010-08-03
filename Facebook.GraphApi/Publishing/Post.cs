@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Facebook.GraphApi {
+namespace Facebook.GraphApi.Publishing {
 
+  /// <summary>
+  /// Post for publishing to wall.
+  /// </summary>
   public class Post {
 
     const string FeedPath = "/feed";
@@ -59,7 +62,7 @@ namespace Facebook.GraphApi {
     /// <param name="profileId">Profile Id.</param>
     public void Publish(long profileId) {
 
-      string path = String.Concat("/", profileId, FeedPath);
+      string path = String.Concat(profileId, FeedPath);
       var arguments = GetRequestArguments();
 
       graphApi.Post(path, arguments);

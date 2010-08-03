@@ -26,9 +26,6 @@ namespace Facebook.GraphApi {
 
     public static string ReadResponse(this HttpWebRequest request) {
 
-      request.AllowAutoRedirect = true;
-      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
       using (var response = GetResponse(request))
       using (var reader = new StreamReader(response.GetResponseStream())) {
         return reader.ReadToEnd();

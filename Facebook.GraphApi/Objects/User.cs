@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Facebook.GraphApi {
+namespace Facebook.GraphApi.Objects {
 
   public class User {
 
@@ -36,14 +36,21 @@ namespace Facebook.GraphApi {
     public string HomeTown { get; set; }
 
     [JsonProperty("location")]
-    public string Location { get; set; }
+    public Location Location { get; set; }
 
     [JsonProperty("gender")]
     public string Gender { get; set; }
 
     [JsonProperty("verified")]
     public bool Verified { get; set; }
+    
+    public override string ToString() {
+      return Name;
+    }
 
+    public string GetPictureUrl(PictureType type) {
+      return String.Concat(Graph.Url, "/", Id, "/picture?type=", type.ToString().ToLower());
+    }
   }
 }
 

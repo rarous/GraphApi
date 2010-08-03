@@ -81,5 +81,14 @@ namespace Facebook.GraphApi {
 
       return response[AccessToken].ToString();
     }
+
+    public bool IsAuthenticated() {
+      try {
+        return String.IsNullOrEmpty(GetAccessToken()) == false;
+      }
+      catch (OAuthException) {
+        return false;
+      }
+    }
   }
 }

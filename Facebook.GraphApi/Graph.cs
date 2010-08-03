@@ -7,9 +7,6 @@ namespace Facebook.GraphApi {
   public class Graph {
 
     public const string Url = "https://graph.facebook.com/";
-    const string AccessTokenKey = "access_token";
-    const string ErrorKey = "error";
-    const string MessageKey = "message";
 
     static Uri baseUri = new Uri(Graph.Url);
 
@@ -86,37 +83,17 @@ namespace Facebook.GraphApi {
 
     JObject Call(string relativePath, HttpVerb httpVerb, IDictionary<string, object> args) {
 
-      Uri url = GetRequestUri(relativePath);
-      var arguments = EnsureArguments(args);
-      AddAccessToken(arguments);
+      var arguments = args.
+        EnsureArguments().
+        AddAccessToken(AccessToken);
 
-      var json = url.MakeJsonRequest(httpVerb, arguments);
-
-      if (json[ErrorKey] != null) {
-        throw new GraphException(GetErrorMessage(json));
-      }
-      return json;
-    }
-
-    void AddAccessToken(IDictionary<string, object> args) {
-      if (String.IsNullOrEmpty(AccessToken) == false) {
-        args[AccessTokenKey] = AccessToken;
-      }
+      return GetRequestUri(relativePath).
+        MakeJsonRequest(httpVerb, arguments).
+        HandleError();
     }
 
     static Uri GetRequestUri(string relativePath) {
       return new Uri(baseUri, relativePath);
-    }
-
-    static IDictionary<string, object> EnsureArguments(IDictionary<string, object> args) {
-      if (args == null) {
-        return new Dictionary<string, object>();
-      }
-      return args;
-    }
-
-    static string GetErrorMessage(JObject json) {
-      return json[ErrorKey][MessageKey].Value<string>();
     }
   }
 }

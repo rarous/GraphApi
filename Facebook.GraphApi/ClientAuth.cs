@@ -31,7 +31,7 @@ namespace Facebook.GraphApi {
 
       var fbCookie = GetFacebookCookie();
 
-      return fbCookie[AccessTokenKey];
+      return HttpUtility.UrlDecode(fbCookie[AccessTokenKey]);
     }
 
     public long GetUserId() {
@@ -48,10 +48,19 @@ namespace Facebook.GraphApi {
       HttpCookie cookie = request.Cookies[cookieName];
 
       if (cookie == null) {
-        throw new ClientAuthException("Can not find user cookie.");
+        throw new ClientAuthException("Cannot find user cookie.");
       }
 
       return cookie;
+    }
+
+    public bool IsAuthenticated() {
+      try {
+        return String.IsNullOrEmpty(GetAccessToken()) == false;
+      }
+      catch (ClientAuthException) {
+        return false;
+      }
     }
   }
 }

@@ -40,13 +40,18 @@ namespace Facebook.GraphApi {
       if (args.Keys.Any()) {
         return new Uri(String.Concat(url, "?", args.ToQueryString()));
       }
+
       return url;
     }
 
     private static HttpWebRequest CreateWebRequest(Uri url, HttpVerb httpVerb) {
+
       var request = WebRequest.Create(url) as HttpWebRequest;
 
+      request.AllowAutoRedirect = true;
+      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
       request.Method = httpVerb.ToString();
+
       return request;
     }
 
@@ -57,6 +62,5 @@ namespace Facebook.GraphApi {
     public static Uri ToUri(this string url, IDictionary<string, object> args) {
       return AppendGetParameters(url.ToUri(), args);
     }
-
   }
 }

@@ -5,16 +5,18 @@ using Newtonsoft.Json.Linq;
 namespace Facebook.GraphApi {
 
   public static class JsonExtensions {
+    
+    const string Error = "error";
 
     public static JObject HandleError(this JObject response) {
-      var error = response.Deserialize<Error>();
+      var error = response[Error].Deserialize<Error>();
       if (error != null) {
         error.ThrowException();
       }
       return response;
     }
 
-    public static T Deserialize<T>(this JObject source) where T : class {
+    public static T Deserialize<T>(this JToken source) where T : class {
       var serializer = new JsonSerializer();
       var reader = source.CreateReader();
 
