@@ -9,9 +9,9 @@ namespace Facebook.GraphApi {
     const string Error = "error";
 
     public static JObject HandleError(this JObject response) {
-      var error = response[Error].Deserialize<Error>();
+      var error = response[Error];
       if (error != null) {
-        error.ThrowException();
+        error.Deserialize<Error>().ThrowException();
       }
       return response;
     }

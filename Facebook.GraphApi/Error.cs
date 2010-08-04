@@ -14,7 +14,7 @@ namespace Facebook.GraphApi {
     public string Message { get; set; }
 
     public void ThrowException() {
-      if (Type == OAuthExceptionName) {
+      if (String.Compare(Type, OAuthExceptionName) == 0) {
         throw new OAuthException(Message);
       }
 

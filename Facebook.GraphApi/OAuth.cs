@@ -27,6 +27,8 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
+    public Permissions Scope { get; set; }
+
     public string GetAccessToken() {
       return GetAccessToken(null);
     }
@@ -74,6 +76,8 @@ namespace Facebook.GraphApi {
         { CodeKey, code },
         { RedirectUriKey, redirectUrl },
       };
+
+      args.AddScope(Scope);
 
       var response = AccessTokenUrl.ToUri().
         MakeJsonRequest(HttpVerb.Get, args).

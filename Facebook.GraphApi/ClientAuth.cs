@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web;
 
 namespace Facebook.GraphApi {
@@ -38,7 +39,7 @@ namespace Facebook.GraphApi {
 
       var fbCookie = GetFacebookCookie();
 
-      return Int64.Parse(fbCookie[UidKey]);
+      return Int64.Parse(new String(fbCookie[UidKey].Where(Char.IsNumber).ToArray()));
     }
 
     private HttpCookie GetFacebookCookie() {
