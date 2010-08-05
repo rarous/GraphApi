@@ -3,20 +3,14 @@ using Newtonsoft.Json;
 
 namespace Facebook.GraphApi.Objects {
 
-  public class User {
-
-    [JsonProperty("id")]
-    public long Id { get; set; }
-
+  public class User : IdNamePair {
+    
     [JsonProperty("first_name")]
     public string FirstName { get; set; }
 
     [JsonProperty("last_name")]
     public string LastName { get; set; }
-
-    [JsonProperty("name")]
-    public string Name { get; set; }
-
+    
     [JsonProperty("link")]
     public string Link { get; set; }
 
@@ -43,10 +37,6 @@ namespace Facebook.GraphApi.Objects {
 
     [JsonProperty("verified")]
     public bool Verified { get; set; }
-    
-    public override string ToString() {
-      return Name;
-    }
 
     public string GetPictureUrl(PictureType type) {
       return String.Concat(Graph.Url, "/", Id, "/picture?type=", type.ToString().ToLower());

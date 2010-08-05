@@ -3,25 +3,28 @@ using Newtonsoft.Json;
 
 namespace Facebook.GraphApi.Objects {
 
-  public class Link : IdNamePair {
+  public class Note {
+
+    [JsonProperty("id")]
+    public long Id { get; set; }
 
     [JsonProperty("from")]
     public IdNamePair From { get; set; }
 
-    [JsonProperty("link")]
-    public string Url { get; set; }
-
-    [JsonProperty("caption")]
-    public string Caption { get; set; }
-
-    [JsonProperty("description")]
-    public string Description { get; set; }
+    [JsonProperty("subject")]
+    public string Subject { get; set; }
 
     [JsonProperty("message")]
     public string Message { get; set; }
 
+    [JsonProperty("created_time")]
+    public DateTime Created { get; set; }
+
     [JsonProperty("updated_time")]
     public DateTime Updated { get; set; }
+
+    public override string ToString() {
+      return Subject;
+    }
   }
 }
-

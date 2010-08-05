@@ -59,7 +59,16 @@
     <Compile Include="OAuth.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Extensions\ParametersExtensions.cs" />
+    <Compile Include="Objects\Address.cs" />
+    <Compile Include="Objects\Album.cs" />
+    <Compile Include="Objects\Application.cs" />
+    <Compile Include="Objects\Group.cs" />
+    <Compile Include="Objects\Note.cs" />
+    <Compile Include="Objects\Photo.cs" />
+    <Compile Include="Objects\Post.cs" />
+    <Compile Include="Objects\Privacy.cs" />
     <Compile Include="Objects\GraphExtensions.cs" />
+    <Compile Include="Objects\IdNamePair.cs" />
     <Compile Include="Objects\Location.cs" />
     <Compile Include="Objects\PictureType.cs" />
     <Compile Include="Permissions.cs" />
