@@ -27,7 +27,9 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
+    public DislayType Display { get; set; }
     public Permissions Scope { get; set; }
+    public AuthorizationType Type { get; set; }
 
     public string GetAccessToken() {
       return GetAccessToken(null);
@@ -36,12 +38,20 @@ namespace Facebook.GraphApi {
     public string GetAccessToken(string redirectUrl) {
 
       if (String.IsNullOrEmpty(redirectUrl)) {
-        redirectUrl = httpContext.Request.Url.ToString();
+        redirectUrl = GetRedirectUrl();
       }
 
       var code = GetAuthorizationCode(redirectUrl);
 
       return GetAccessToken(code, redirectUrl);
+    }
+
+    private string GetRedirectUrl() {
+      string redirectUrl = httpContext.Request.Url.ToString();
+      if (redirectUrl.Contains("?")) {
+        redirectUrl = redirectUrl.Substring(0, redirectUrl.IndexOf('?'));
+      }
+      return redirectUrl;
     }
 
     private string GetAuthorizationCode(string redirectUrl) {
@@ -62,6 +72,10 @@ namespace Facebook.GraphApi {
         { RedirectUriKey, redirectUrl },
       };
 
+      args.AddScope(Scope).
+        AddDisplayType(Display).
+        AddAuthorizationType(Type);
+
       var requestUrl = AuthorizeUrl.ToUri(args);
 
       httpContext.Response.Redirect(requestUrl.ToString(), true);
@@ -77,13 +91,10 @@ namespace Facebook.GraphApi {
         { RedirectUriKey, redirectUrl },
       };
 
-      args.AddScope(Scope);
-
       var response = AccessTokenUrl.ToUri().
-        MakeJsonRequest(HttpVerb.Get, args).
-        HandleError();
+        MakeNameValueRequest(HttpVerb.Get, args);
 
-      return response[AccessToken].ToString();
+      return response[AccessToken];
     }
 
     public bool IsAuthenticated() {

@@ -68,6 +68,13 @@ namespace Facebook.GraphApi.Publishing {
       graphApi.Post(path, arguments);
     }
 
+    public void Publish() {
+      string path = String.Concat("/me", FeedPath);
+      var arguments = GetRequestArguments();
+
+      graphApi.Post(path, arguments);
+    }
+
     private IDictionary<string, object> GetRequestArguments() {
 
       return (from property in GetType().GetProperties()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Collections.Specialized;
+using System.Web;
 
 namespace Facebook.GraphApi {
 
@@ -13,6 +15,13 @@ namespace Facebook.GraphApi {
       string response = url.MakeRequest(httpVerb, args);
 
       return JObject.Parse(response);
+    }
+
+    public static NameValueCollection MakeNameValueRequest(this Uri url, HttpVerb httpVerb, IDictionary<string, object> args) {
+      
+      string response = url.MakeRequest(httpVerb, args);
+
+      return HttpUtility.ParseQueryString(response);
     }
 
     public static string MakeRequest(this Uri url, HttpVerb httpVerb, IDictionary<string, object> args) {

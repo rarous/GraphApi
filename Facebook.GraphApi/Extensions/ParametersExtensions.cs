@@ -7,11 +7,27 @@ namespace Facebook.GraphApi {
   public static class ParametersExtensions {
 
     const string AccessTokenKey = "access_token";
+    const string Display = "display";
     const string Scope = "scope";
+    const string Type = "type";
 
     public static IDictionary<string, object> AddAccessToken(this IDictionary<string, object> args, string accessToken) {
       if (String.IsNullOrEmpty(accessToken) == false) {
         args[AccessTokenKey] = accessToken;
+      }
+      return args;
+    }
+
+    public static IDictionary<string, object> AddAuthorizationType(this IDictionary<string, object> args, AuthorizationType type) {
+      if (type != AuthorizationType.None) {
+        args.Add(Type, type.ToString().ToUndescoreCasing());
+      }
+      return args;
+    }
+
+    public static IDictionary<string, object> AddDisplayType(this IDictionary<string, object> args, DislayType display) {
+      if (display != DislayType.Page) {
+        args.Add(Display, display.ToString().ToUndescoreCasing());
       }
       return args;
     }
@@ -44,9 +60,8 @@ namespace Facebook.GraphApi {
     }
 
     public static string ToQueryString(this IDictionary<string, object> parameters) {
-      return parameters.
-        Select(NameValuePair).
-        Aggregate(String.Empty, JoinPairs);
+      const string pairsSeparator = "&";
+      return String.Join(pairsSeparator, parameters.Select(NameValuePair).ToArray());
     }
 
     private static string NameValuePair(KeyValuePair<string, object> pair) {
@@ -54,9 +69,5 @@ namespace Facebook.GraphApi {
       return String.Concat(pair.Key, keyValueSeparator, pair.Value);
     }
 
-    private static string JoinPairs(string acc, string item) {
-      const string pairsSeparator = "&";
-      return String.Concat(acc, pairsSeparator, item);
-    }
   }
 }

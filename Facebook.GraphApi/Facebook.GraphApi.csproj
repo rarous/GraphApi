@@ -47,8 +47,10 @@
     <Reference Include="System.Web.Abstractions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationType.cs" />
     <Compile Include="ClientAuth.cs" />
     <Compile Include="ClientAuthException.cs" />
+    <Compile Include="DislayType.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="GraphFactory.cs" />
     <Compile Include="HttpVerb.cs" />
