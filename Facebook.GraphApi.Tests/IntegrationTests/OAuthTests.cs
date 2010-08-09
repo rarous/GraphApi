@@ -5,7 +5,7 @@ using System.Text;
 using Xunit;
 
 namespace Facebook.GraphApi.Tests {
-  public class OAuthSpec {
+  public class OAuthTests {
 
     [Fact]
     public void Test() {
