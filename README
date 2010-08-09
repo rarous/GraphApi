@@ -1,0 +1,6 @@
+.net implementation of Facebook Graph API http://developers.facebook.com/docs/reference/api/
+
+Includes:
+* support for JS SDK login and OAuth authentication
+* strongly typed objects of Graph
+* publication API for wall posts and albums (photos BTA)
