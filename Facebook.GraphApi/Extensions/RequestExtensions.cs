@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Web;
+using System.Text;
 
 namespace Facebook.GraphApi {
 
   public static class RequestExtensions {
 
     const string FormUrlEncoded = "application/x-www-form-urlencoded";
+    const string UserAgent = "Facebook.GraphApi .net library (http://github.com/rarous/GraphApi)";
     
     public static void PostData(this HttpWebRequest request, IDictionary<string, object> data) {
 
-      string postData = data.ToQueryString();
-      byte[] postDataBytes = HttpUtility.UrlEncodeToBytes(postData);
-
+      request.Method = WebRequestMethods.Http.Post;
       request.ContentType = FormUrlEncoded;
+      request.UserAgent = UserAgent;
+
+      string postData = data.ToQueryString();
+      byte[] postDataBytes = Encoding.ASCII.GetBytes(postData);
+
       request.ContentLength = postDataBytes.Length;
 
       // TODO: async
@@ -32,7 +37,7 @@ namespace Facebook.GraphApi {
       }
     }
 
-    private static WebResponse GetResponse(HttpWebRequest request) {
+    static WebResponse GetResponse(HttpWebRequest request) {
       try {
         // TODO: async
         return request.GetResponse();

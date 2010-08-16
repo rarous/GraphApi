@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 
 namespace Facebook.GraphApi {
 
@@ -66,7 +67,8 @@ namespace Facebook.GraphApi {
 
     private static string NameValuePair(KeyValuePair<string, object> pair) {
       const string keyValueSeparator = "=";
-      return String.Concat(pair.Key, keyValueSeparator, pair.Value);
+      string value = pair.Value.ToString();
+      return String.Concat(pair.Key, keyValueSeparator, HttpUtility.UrlEncode(value));
     }
 
   }
