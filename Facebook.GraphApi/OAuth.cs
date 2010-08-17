@@ -46,7 +46,7 @@ namespace Facebook.GraphApi {
       return GetAccessToken(code, redirectUrl);
     }
 
-    private string GetRedirectUrl() {
+    string GetRedirectUrl() {
       string redirectUrl = httpContext.Request.Url.ToString();
       if (redirectUrl.Contains("?")) {
         redirectUrl = redirectUrl.Substring(0, redirectUrl.IndexOf('?'));
@@ -54,7 +54,7 @@ namespace Facebook.GraphApi {
       return redirectUrl;
     }
 
-    private string GetAuthorizationCode(string redirectUrl) {
+    string GetAuthorizationCode(string redirectUrl) {
 
       var code = httpContext.Request[CodeKey];
       if (String.IsNullOrEmpty(code)) {
@@ -64,7 +64,7 @@ namespace Facebook.GraphApi {
       return code;
     }
 
-    private void RequestAuthorizationCode(string redirectUrl) {
+    void RequestAuthorizationCode(string redirectUrl) {
 
       var args = new Dictionary<string, object> {
         { ResponseTypeKey, CodeKey },
@@ -81,7 +81,7 @@ namespace Facebook.GraphApi {
       httpContext.Response.Redirect(requestUrl.ToString(), true);
     }
 
-    private string GetAccessToken(string code, string redirectUrl) {
+    string GetAccessToken(string code, string redirectUrl) {
 
       var args = new Dictionary<string, object> {
         { GrantTypeKey, AuthorizationCode },

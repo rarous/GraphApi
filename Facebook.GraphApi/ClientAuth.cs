@@ -42,7 +42,7 @@ namespace Facebook.GraphApi {
       return Int64.Parse(new String(fbCookie[UidKey].Where(Char.IsNumber).ToArray()));
     }
 
-    private HttpCookie GetFacebookCookie() {
+    HttpCookie GetFacebookCookie() {
 
       string cookieName = FacebookCookiePrefix + clientId;
       HttpRequestBase request = httpContext.Request;

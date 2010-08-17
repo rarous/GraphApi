@@ -35,7 +35,7 @@ namespace Facebook.GraphApi.Publishing {
       graphApi.Post(path, arguments);
     }
 
-    private IDictionary<string, object> GetRequestArguments() {
+    IDictionary<string, object> GetRequestArguments() {
 
       return (from property in GetType().GetProperties()
               let key = GetKey(property)

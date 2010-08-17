@@ -65,9 +65,9 @@ namespace Facebook.GraphApi {
       return String.Join(pairsSeparator, parameters.Select(NameValuePair).ToArray());
     }
 
-    private static string NameValuePair(KeyValuePair<string, object> pair) {
+    static string NameValuePair(KeyValuePair<string, object> pair) {
       const string keyValueSeparator = "=";
-      string value = pair.Value.ToString();
+      string value = pair.Value != null ? pair.Value.ToString() : String.Empty;
       return String.Concat(pair.Key, keyValueSeparator, HttpUtility.UrlEncode(value));
     }
 

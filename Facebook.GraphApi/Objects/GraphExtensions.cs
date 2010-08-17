@@ -4,11 +4,11 @@ namespace Facebook.GraphApi.Objects {
 
   public static class GraphExtensions {
 
-    private static T Get<T>(this Graph graphApi, long objectId) where T : class {
+    static T Get<T>(this Graph graphApi, long objectId) where T : class {
       return graphApi.Get(objectId).Deserialize<T>();
     }
 
-    private static T Get<T>(this Graph graphApi, string objectName) where T : class {
+    static T Get<T>(this Graph graphApi, string objectName) where T : class {
       return graphApi.Get(objectName).Deserialize<T>();
     }
 

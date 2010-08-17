@@ -10,6 +10,8 @@ namespace Facebook.GraphApi {
 
   public static class UriExtensions {
 
+    const string UserAgent = "Facebook.GraphApi .net library (http://github.com/rarous/GraphApi)";
+
     public static JObject MakeJsonRequest(this Uri url, HttpVerb httpVerb, IDictionary<string, object> args) {
 
       string response = url.MakeRequest(httpVerb, args);
@@ -30,7 +32,7 @@ namespace Facebook.GraphApi {
         url = AppendGetParameters(url, args);
       }
 
-      HttpWebRequest request = CreateWebRequest(url, httpVerb);
+      HttpWebRequest request = CreateWebRequest(url);
 
       if (httpVerb == HttpVerb.Post) {
         request.PostData(args);
@@ -44,7 +46,7 @@ namespace Facebook.GraphApi {
       }
     }
 
-    private static Uri AppendGetParameters(this Uri url, IDictionary<string, object> args) {
+    static Uri AppendGetParameters(this Uri url, IDictionary<string, object> args) {
 
       if (args.Keys.Any()) {
         return new Uri(String.Concat(url, "?", args.ToQueryString()));
@@ -53,13 +55,13 @@ namespace Facebook.GraphApi {
       return url;
     }
 
-    private static HttpWebRequest CreateWebRequest(Uri url, HttpVerb httpVerb) {
+    static HttpWebRequest CreateWebRequest(Uri url) {
 
       var request = WebRequest.Create(url) as HttpWebRequest;
 
       request.AllowAutoRedirect = true;
       request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-      request.Method = httpVerb.ToString();
+      request.UserAgent = UserAgent;
 
       return request;
     }
