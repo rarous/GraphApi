@@ -33,17 +33,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\Library\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\lib\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="xunit">
-      <HintPath>..\Library\xUnit.net\xunit.dll</HintPath>
+      <HintPath>..\..\lib\xUnit.net\xunit.dll</HintPath>
     </Reference>
     <Reference Include="xunit.extensions">
-      <HintPath>..\Library\xUnit.net\xunit.extensions.dll</HintPath>
+      <HintPath>..\..\lib\xUnit.net\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

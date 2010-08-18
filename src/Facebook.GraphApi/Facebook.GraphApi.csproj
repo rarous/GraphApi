@@ -35,19 +35,19 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\Library\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.CoreEx, Version=1.0.2617.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\lib\Rx\System.CoreEx.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive, Version=1.0.2617.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\lib\Rx\System.Interactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Observable, Version=1.0.0.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\lib\Rx\System.Observable.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive, Version=1.0.2617.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <HintPath>..\..\lib\Rx\System.Reactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />

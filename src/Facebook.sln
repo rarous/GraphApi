@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.GraphApi", "Facebook.GraphApi\Facebook.GraphApi.csproj", "{D63DFF91-EE7D-4CD7-B771-B06623DC5909}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.GraphApi.Tests", "Facebook.GraphApi.Tests\Facebook.GraphApi.Tests.csproj", "{7B116114-EF81-4C57-AF49-09BB679AF4D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{D63DFF91-EE7D-4CD7-B771-B06623DC5909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D63DFF91-EE7D-4CD7-B771-B06623DC5909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D63DFF91-EE7D-4CD7-B771-B06623DC5909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B116114-EF81-4C57-AF49-09BB679AF4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B116114-EF81-4C57-AF49-09BB679AF4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B116114-EF81-4C57-AF49-09BB679AF4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B116114-EF81-4C57-AF49-09BB679AF4D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
