@@ -1,8 +1,8 @@
-*/bin/*
-*/Bin/*
-*/obj/*
-*/Obj/*
-*/sql/*
+*/*/bin/*
+*/*/Bin/*
+*/*/obj/*
+***/Obj/*
+***/sql/*
 *.user
 *.suo
 *.tmp
