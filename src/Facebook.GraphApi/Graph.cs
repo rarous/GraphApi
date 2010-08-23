@@ -92,7 +92,7 @@ namespace Facebook.GraphApi {
       return Call(SearchPath, HttpVerb.Get, args.ToDictionary());
     }
 
-    JObject Call(string relativePath, HttpVerb httpVerb, IDictionary<string, object> args) {
+    protected virtual JObject Call(string relativePath, HttpVerb httpVerb, IDictionary<string, object> args) {
 
       var arguments = args.
         EnsureArguments().

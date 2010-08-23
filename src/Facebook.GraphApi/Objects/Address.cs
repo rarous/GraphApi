@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Facebook.GraphApi.Objects {
 
-  public class Address {
+  public class Address : LatLong {
 
     [JsonProperty("street")]
     public string Street { get; set; }
@@ -19,11 +19,5 @@ namespace Facebook.GraphApi.Objects {
 
     [JsonProperty("country")]
     public string Country { get; set; }
-
-    [JsonProperty("latitude")]
-    public string Latitude { get; set; }
-
-    [JsonProperty("longitude")]
-    public string Longitude { get; set; }
   }
 }

@@ -28,6 +28,10 @@ namespace Facebook.GraphApi.Objects {
       return graphApi.Get<Group>(groupId);
     }
 
+    public static Checkin GetCheckin(this Graph graphApi, long checkinId) {
+      return graphApi.Get<Checkin>(checkinId);
+    }
+
     public static Link GetLink(this Graph graphApi, long linkId) {
       return graphApi.Get<Link>(linkId);
     }

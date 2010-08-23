@@ -5,6 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.GraphApi", "Facebo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook.GraphApi.Tests", "Facebook.GraphApi.Tests\Facebook.GraphApi.Tests.csproj", "{7B116114-EF81-4C57-AF49-09BB679AF4D2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{73706EB3-E558-43B8-B765-4638264EE260}"
+	ProjectSection(SolutionItems) = preProject
+		..\default.ps1 = ..\default.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
