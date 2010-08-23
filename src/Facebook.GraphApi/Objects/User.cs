@@ -39,8 +39,7 @@ namespace Facebook.GraphApi.Objects {
     public bool Verified { get; set; }
 
     public string GetPictureUrl(PictureType type) {
-      return String.Concat(Graph.Url, "/", Id, "/picture?type=", type.ToString().ToLower());
+      return PicturesHelper.GetImageUrl(Id, type);
     }
   }
 }
-
