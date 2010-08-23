@@ -7,6 +7,7 @@ namespace Facebook.GraphApi {
   public class Graph {
 
     public const string Url = "https://graph.facebook.com/";
+    const string SearchPath = "/search";
 
     static Uri baseUri = new Uri(Graph.Url);
 
@@ -79,6 +80,16 @@ namespace Facebook.GraphApi {
     public JObject Post(string relativePath, IDictionary<string, object> args) {
 
       return Call(relativePath, HttpVerb.Post, args);
+    }
+
+    /// <summary>
+    /// Searches Facebook Graph objects.
+    /// </summary>
+    /// <param name="args">Search arguments.</param>
+    /// <returns></returns>
+    public JObject Search(SearchArguments args) {
+
+      return Call(SearchPath, HttpVerb.Get, args.ToDictionary());
     }
 
     JObject Call(string relativePath, HttpVerb httpVerb, IDictionary<string, object> args) {
