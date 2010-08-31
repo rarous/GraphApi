@@ -4,6 +4,16 @@ using System.Web;
 
 namespace Facebook.GraphApi {
 
+  /// <summary>
+  /// Client authentication for use with JS SDK.
+  /// </summary>
+  /// <remarks>
+  /// To work properly, you need to initialize JD SDK with <c>status</c> and <c>cookie</c>
+  /// parameters set to <c>true</c>.
+  /// <para>
+  /// <c>FB.init({ appId: 'your app id', status: true, cookie: true });</c>
+  /// </para>
+  /// </remarks>
   public class ClientAuth : IAuthentication {
 
     const string AccessTokenKey = "\"access_token";
@@ -28,18 +38,32 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
+    /// <summary>
+    /// Gets access token of authenticated user.
+    /// </summary>
+    /// <returns></returns>
     public string GetAccessToken() {
 
-      var fbCookie = GetFacebookCookie();
+      HttpCookie fbCookie = GetFacebookCookie();
 
       return HttpUtility.UrlDecode(fbCookie[AccessTokenKey]);
     }
 
+    /// <summary>
+    /// Gets Facebook's UID of authenticated user.
+    /// </summary>
+    /// <returns></returns>
     public long GetUserId() {
 
-      var fbCookie = GetFacebookCookie();
+      HttpCookie fbCookie = GetFacebookCookie();
+      string userIdString = ParseUserId(fbCookie[UidKey]);
 
-      return Int64.Parse(new String(fbCookie[UidKey].Where(Char.IsNumber).ToArray()));
+      return Int64.Parse(userIdString);
+    }
+
+    static string ParseUserId(string uidValue) {
+      // Facebook cookie vas dirty values in quotes etc. We need only numbers.
+      return new String(uidValue.Where(Char.IsNumber).ToArray());
     }
 
     HttpCookie GetFacebookCookie() {
@@ -55,6 +79,10 @@ namespace Facebook.GraphApi {
       return cookie;
     }
 
+    /// <summary>
+    /// Checks that user is authenticated.
+    /// </summary>
+    /// <returns>Returns <c>true</c> if user is authenticated. Otherwise <c>false</c>.</returns>
     public bool IsAuthenticated() {
       try {
         return String.IsNullOrEmpty(GetAccessToken()) == false;

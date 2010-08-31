@@ -1,7 +1,7 @@
 using System;
 
 namespace Facebook.GraphApi {
-  public enum DislayType {
+  public enum DisplayType {
     Page,
     Popup,
     Wap,

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ParametersExtensionsSpec.cs" />
+    <Compile Include="Extensions\UriExtensionsSpec.cs" />
     <Compile Include="MockHelpers.cs" />
     <Compile Include="IntegrationTests\OAuthTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

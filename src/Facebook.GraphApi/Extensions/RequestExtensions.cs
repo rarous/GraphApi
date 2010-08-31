@@ -7,18 +7,28 @@ using System.Text;
 
 namespace Facebook.GraphApi {
 
+  /// <summary>
+  /// Extensions for <see cref="HttpWebRequest"/>.
+  /// </summary>
   public static class RequestExtensions {
 
     const string FormUrlEncoded = "application/x-www-form-urlencoded";
-    
-    public static void PostData(this HttpWebRequest request, IDictionary<string, object> data) {
+
+    /// <summary>
+    /// Post data from dictionary via request. Only if request method id POST.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    public static HttpWebRequest PostData(this HttpWebRequest request, IDictionary<string, object> data) {
+
+      if (request.Method != WebRequestMethods.Http.Post) {
+        return request;
+      }
 
       byte[] postData = GetPostData(data);
-      PreparePostRequest(request, postData);
 
-      Observable.
-        FromAsyncPattern<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream)().
-        Run(WriteToStream(postData));
+      return request.PostData(postData);
     }
 
     static byte[] GetPostData(IDictionary<string, object> data) {
@@ -26,10 +36,33 @@ namespace Facebook.GraphApi {
       return Encoding.ASCII.GetBytes(postData);
     }
 
-    static void PreparePostRequest(HttpWebRequest request, byte[] postData) {
+    static HttpWebRequest PostData(this HttpWebRequest request, byte[] postData) {
+
+      var getStreamObservable = request.
+        PreparePostRequest(postData).
+        ObserveRequestStream();
+      
+      getStreamObservable().Run(
+        WriteToStream(postData)
+      );
+
+      return request;
+    }
+
+    static HttpWebRequest PreparePostRequest(this HttpWebRequest request, byte[] postData) {
+
       request.ContentLength = postData.Length;
       request.ContentType = FormUrlEncoded;
-      request.Method = WebRequestMethods.Http.Post;
+
+      return request;
+    }
+
+    static Func<IObservable<Stream>> ObserveRequestStream(this HttpWebRequest request) {
+
+      Func<AsyncCallback, object, IAsyncResult> begin = request.BeginGetRequestStream;
+      Func<IAsyncResult, Stream> end = request.EndGetRequestStream;
+
+      return Observable.FromAsyncPattern<Stream>(begin, end);
     }
 
     static Action<Stream> WriteToStream(byte[] postDataBytes) {
@@ -40,9 +73,13 @@ namespace Facebook.GraphApi {
       };
     }
 
+    /// <summary>
+    /// Reads requests response text even if request is bad (error response).
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public static string ReadResponse(this HttpWebRequest request) {
-
-      using (var response = GetResponse(request)) 
+      using (var response = GetResponse(request))
       using (var reader = new StreamReader(response.GetResponseStream())) {
         return reader.ReadToEnd();
       }
@@ -50,14 +87,22 @@ namespace Facebook.GraphApi {
 
     static WebResponse GetResponse(HttpWebRequest request) {
 
+      var getResponseObservable = ObserveAsyncRequest(request);
+
       try {
-        return Observable.
-          FromAsyncPattern<WebResponse>(request.BeginGetResponse, request.EndGetResponse)().
-          First();
+        return getResponseObservable().First();
       }
       catch (WebException ex) {
         return ex.Response;
       }
+    }
+
+    static Func<IObservable<WebResponse>> ObserveAsyncRequest(HttpWebRequest request) {
+
+      Func<AsyncCallback, object, IAsyncResult> begin = request.BeginGetResponse;
+      Func<IAsyncResult, WebResponse> end = request.EndGetResponse;
+
+      return Observable.FromAsyncPattern<WebResponse>(begin, end);
     }
   }
 }

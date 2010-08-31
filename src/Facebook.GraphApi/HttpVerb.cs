@@ -4,10 +4,8 @@ namespace Facebook.GraphApi {
 
   [Flags]
   public enum HttpVerb {
-    Get,
-    Post,
-    Put,
-    Delete,
-    Head,
+    Get = 0x1,
+    Post = 0x2,
+    Delete = 0x4,
   }
 }

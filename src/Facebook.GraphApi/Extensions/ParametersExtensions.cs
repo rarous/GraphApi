@@ -26,8 +26,8 @@ namespace Facebook.GraphApi {
       return args;
     }
 
-    public static IDictionary<string, object> AddDisplayType(this IDictionary<string, object> args, DislayType display) {
-      if (display != DislayType.Page) {
+    public static IDictionary<string, object> AddDisplayType(this IDictionary<string, object> args, DisplayType display) {
+      if (display != DisplayType.Page) {
         args.Add(Display, display.ToString().ToUndescoreCasing());
       }
       return args;

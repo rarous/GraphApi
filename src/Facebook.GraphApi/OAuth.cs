@@ -27,7 +27,7 @@ namespace Facebook.GraphApi {
       this.httpContext = httpContext;
     }
 
-    public DislayType Display { get; set; }
+    public DisplayType Display { get; set; }
     public Permissions Scope { get; set; }
     public AuthorizationType Type { get; set; }
 

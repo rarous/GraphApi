@@ -2,8 +2,9 @@ using System;
 using System.Runtime.Serialization;
 
 namespace Facebook.GraphApi {
+
   /// <summary>
-  /// 
+  /// Exception thrown by <see cref="ClientAuth"/>.
   /// </summary>
   [Serializable]
   public class ClientAuthException : Exception {

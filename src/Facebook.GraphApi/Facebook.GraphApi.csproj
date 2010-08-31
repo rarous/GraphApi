@@ -56,7 +56,7 @@
     <Compile Include="AuthorizationType.cs" />
     <Compile Include="ClientAuth.cs" />
     <Compile Include="ClientAuthException.cs" />
-    <Compile Include="DislayType.cs" />
+    <Compile Include="DisplayType.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="GraphFactory.cs" />
     <Compile Include="HttpVerb.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Objects\LatLong.cs" />
     <Compile Include="Objects\Note.cs" />
     <Compile Include="Objects\Photo.cs" />
+    <Compile Include="Objects\PicturesHelper.cs" />
     <Compile Include="Objects\Post.cs" />
     <Compile Include="Objects\Privacy.cs" />
     <Compile Include="Objects\GraphExtensions.cs" />

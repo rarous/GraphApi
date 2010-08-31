@@ -4,8 +4,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Facebook.GraphApi {
 
+  /// <summary>
+  /// Graph API.
+  /// </summary>
   public class Graph {
 
+    /// <summary>
+    /// Base URL of Graph API.
+    /// </summary>
     public const string Url = "https://graph.facebook.com/";
     const string SearchPath = "/search";
 
@@ -28,6 +34,9 @@ namespace Facebook.GraphApi {
       this.accessToken = accessToken;
     }
 
+    /// <summary>
+    /// Gets the access token.
+    /// </summary>
     public string AccessToken {
       get {
         return accessToken;
@@ -92,6 +101,13 @@ namespace Facebook.GraphApi {
       return Call(SearchPath, HttpVerb.Get, args.ToDictionary());
     }
 
+    /// <summary>
+    /// Makes call to Graph API.
+    /// </summary>
+    /// <param name="relativePath">Relative request URL.</param>
+    /// <param name="httpVerb">HTTP verb of call.</param>
+    /// <param name="args">Dictionary of request arguments.</param>
+    /// <returns>Returns JSON response deserialized as <see cref="JObject"/>.</returns>
     protected virtual JObject Call(string relativePath, HttpVerb httpVerb, IDictionary<string, object> args) {
 
       var arguments = args.
