@@ -38,13 +38,10 @@ namespace Facebook.GraphApi {
 
     static HttpWebRequest PostData(this HttpWebRequest request, byte[] postData) {
 
-      var getStreamObservable = request.
+      request.
         PreparePostRequest(postData).
-        ObserveRequestStream();
-      
-      getStreamObservable().Run(
-        WriteToStream(postData)
-      );
+        GetRequestStreamAsObservable().
+        Run(WriteToStream(postData));
 
       return request;
     }
@@ -55,6 +52,11 @@ namespace Facebook.GraphApi {
       request.ContentType = FormUrlEncoded;
 
       return request;
+    }
+
+    static IObservable<Stream> GetRequestStreamAsObservable(this HttpWebRequest request) {
+      var getRequestStreamAsObservable = request.ObserveRequestStream();
+      return getRequestStreamAsObservable();
     }
 
     static Func<IObservable<Stream>> ObserveRequestStream(this HttpWebRequest request) {
@@ -86,15 +88,17 @@ namespace Facebook.GraphApi {
     }
 
     static WebResponse GetResponse(HttpWebRequest request) {
-
-      var getResponseObservable = ObserveAsyncRequest(request);
-
       try {
-        return getResponseObservable().First();
+        return request.GetWebResponseAsObservable().First();
       }
       catch (WebException ex) {
         return ex.Response;
       }
+    }
+
+    static IObservable<WebResponse> GetWebResponseAsObservable(this HttpWebRequest request) {
+      var getWebResponseAsObservable = ObserveAsyncRequest(request);
+      return getWebResponseAsObservable();
     }
 
     static Func<IObservable<WebResponse>> ObserveAsyncRequest(HttpWebRequest request) {
