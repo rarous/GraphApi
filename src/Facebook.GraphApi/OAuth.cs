@@ -47,10 +47,12 @@ namespace Facebook.GraphApi {
     }
 
     string GetRedirectUrl() {
+
       string redirectUrl = httpContext.Request.Url.ToString();
       if (redirectUrl.Contains("?")) {
         redirectUrl = redirectUrl.Substring(0, redirectUrl.IndexOf('?'));
       }
+
       return redirectUrl;
     }
 
