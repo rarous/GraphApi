@@ -1,7 +1,7 @@
-using System;
-using System.Runtime.Serialization;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using System.Runtime.Serialization;
 
   /// <summary>
   /// Exception thrown by <see cref="ClientAuth"/>.

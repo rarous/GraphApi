@@ -10,3 +10,4 @@
 *.log
 log.txt
 log.txt.*
+StyleCop.Cache

@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
-
 namespace Facebook.GraphApi.Objects {
+
+  using System;
+  using System.Collections.Generic;
 
   public static class SearchExtensions {
 

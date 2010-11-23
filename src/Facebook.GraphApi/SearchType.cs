@@ -1,5 +1,3 @@
-using System;
-
 namespace Facebook.GraphApi {
 
   public static class SearchType {

@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using System.Collections.Generic;
+  using System.IO;
+  using System.Linq;
+  using System.Net;
+  using System.Text;
 
   /// <summary>
   /// Extensions for <see cref="HttpWebRequest"/>.

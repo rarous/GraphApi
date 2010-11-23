@@ -1,8 +1,8 @@
-using System;
-using System.Linq;
-using System.Web;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using System.Linq;
+  using System.Web;
 
   /// <summary>
   /// Client authentication for use with JS SDK.

@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Web;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using System.Collections.Generic;
+  using System.Web;
 
   public class OAuth : IAuthentication {
 

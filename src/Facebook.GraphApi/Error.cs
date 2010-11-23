@@ -1,7 +1,7 @@
-using System;
-using Newtonsoft.Json;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using Newtonsoft.Json;
 
   /// <summary>
   /// Error response class.

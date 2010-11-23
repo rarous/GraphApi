@@ -1,6 +1,6 @@
-using System;
-
 namespace Facebook.GraphApi {
+
+  using System;
 
   [Flags]
   public enum HttpVerb {

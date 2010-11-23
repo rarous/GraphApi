@@ -1,6 +1,6 @@
-﻿using System;
+﻿namespace Facebook.GraphApi.Objects {
 
-namespace Facebook.GraphApi.Objects {
+  using System;
 
   public static class GraphExtensions {
 

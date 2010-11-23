@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
 namespace Facebook.GraphApi.Publishing {
+
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Reflection;
 
   /// <summary>
   /// Base type for publishing entities.
@@ -37,11 +37,13 @@ namespace Facebook.GraphApi.Publishing {
 
     IDictionary<string, object> GetRequestArguments() {
 
-      return (from property in GetType().GetProperties()
-              let key = GetKey(property)
-              let value = GetValue(property)
-              select new { key, value }).
-              ToDictionary(x => x.key, x => x.value);
+      var properties = GetType().GetProperties();
+      var query = from property in properties
+                  let key = GetKey(property)
+                  let value = GetValue(property)
+                  select new { key, value };
+
+      return query.ToDictionary(x => x.key, x => x.value);
     }
 
     /// <summary>

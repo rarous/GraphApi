@@ -97,6 +97,7 @@
     <Compile Include="Publishing\FeedPublishingBase.cs" />
     <Compile Include="Publishing\GraphExtensions.cs" />
     <Compile Include="Publishing\Link.cs" />
+    <Compile Include="Publishing\NameLink.cs" />
     <Compile Include="Publishing\Post.cs" />
     <Compile Include="Objects\Page.cs" />
     <Compile Include="Objects\Link.cs" />

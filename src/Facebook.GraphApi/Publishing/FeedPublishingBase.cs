@@ -1,6 +1,6 @@
-using System;
-
 namespace Facebook.GraphApi.Publishing {
+
+  using System;
 
   /// <summary>
   /// Base type for entities publishing to wall.

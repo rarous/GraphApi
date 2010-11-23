@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Web;
 
   public static class ParametersExtensions {
 
@@ -47,7 +47,7 @@ namespace Facebook.GraphApi {
                       ch = cur,
                       isCamel = Char.IsUpper(cur) && !Char.IsWhiteSpace(prev),
                     }))
-                  where Char.IsWhiteSpace(l.ch) == false
+                  where !Char.IsWhiteSpace(l.ch)
                   select l.isCamel ? "_" + l.ch : l.ch.ToString();
 
       return String.Concat(text.First(), String.Join(String.Empty, query.ToArray())).ToLower();

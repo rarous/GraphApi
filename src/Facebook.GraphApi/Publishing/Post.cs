@@ -1,6 +1,7 @@
-using System;
-
 namespace Facebook.GraphApi.Publishing {
+
+  using System;
+  using System.Reflection;
 
   /// <summary>
   /// Post for publishing to wall.
@@ -49,5 +50,18 @@ namespace Facebook.GraphApi.Publishing {
     /// Gets or sets the source link attached to this post.
     /// </summary>
     public string Source { get; set; }
+
+    /// <summary>
+    /// Gets or sets the list of available actions on the post.
+    /// </summary>
+    public NameLink[] Actions { get; set; }
+
+    /// <inheritdoc />
+    protected override object GetValue(PropertyInfo property) {
+      if (property.Name == "Actions" && Actions != null) {
+        return Actions.ToJson();
+      }
+      return base.GetValue(property);
+    }
   }
 }

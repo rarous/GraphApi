@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Web;
-
 namespace Facebook.GraphApi {
+
+  using System;
 
   [Flags]
   public enum Permissions : long {

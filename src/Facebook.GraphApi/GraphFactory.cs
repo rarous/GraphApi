@@ -1,6 +1,6 @@
-using System;
-
 namespace Facebook.GraphApi {
+
+  using System;
 
   public class GraphFactory {
 

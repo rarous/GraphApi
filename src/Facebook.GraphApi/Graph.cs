@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+﻿namespace Facebook.GraphApi {
 
-namespace Facebook.GraphApi {
+  using System;
+  using System.Collections.Generic;
+  using Newtonsoft.Json.Linq;
 
   /// <summary>
   /// Graph API.

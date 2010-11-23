@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Net;
-using System.Web;
-using Newtonsoft.Json.Linq;
-
 namespace Facebook.GraphApi {
+
+  using System;
+  using System.Collections.Generic;
+  using System.Collections.Specialized;
+  using System.Linq;
+  using System.Net;
+  using System.Web;
+  using Newtonsoft.Json.Linq;
 
   /// <summary>
   /// URI extensions.
