@@ -55,8 +55,8 @@ namespace Facebook.GraphApi {
     /// <returns></returns>
     public long GetUserId() {
 
-      HttpCookie fbCookie = GetFacebookCookie();
-      string userIdString = ParseUserId(fbCookie[UidKey]);
+      HttpCookie facebookCookie = GetFacebookCookie();
+      string userIdString = ParseUserId(facebookCookie[UidKey]);
 
       return Int64.Parse(userIdString);
     }

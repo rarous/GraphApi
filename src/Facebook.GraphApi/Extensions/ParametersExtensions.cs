@@ -61,14 +61,14 @@ namespace Facebook.GraphApi {
     }
 
     public static string ToQueryString(this IDictionary<string, object> parameters) {
-      const string pairsSeparator = "&";
-      return String.Join(pairsSeparator, parameters.Select(NameValuePair).ToArray());
+      const string PairsSeparator = "&";
+      return String.Join(PairsSeparator, parameters.Select(NameValuePair).ToArray());
     }
 
     static string NameValuePair(KeyValuePair<string, object> pair) {
-      const string keyValueSeparator = "=";
+      const string KeyValueSeparator = "=";
       string value = pair.Value != null ? pair.Value.ToString() : String.Empty;
-      return String.Concat(pair.Key, keyValueSeparator, HttpUtility.UrlEncode(value));
+      return String.Concat(pair.Key, KeyValueSeparator, HttpUtility.UrlEncode(value));
     }
 
   }
