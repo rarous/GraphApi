@@ -4,3 +4,13 @@ Includes:
 * support for JS SDK login and OAuth authentication
 * strongly typed objects of Graph
 * publication API for wall posts and albums (photos BTA)
+
+How to build
+=============
+
+1. Download source
+2. Run .\build.ps1 from powershell
+3. Final binaries are in Release folder
+
+(You need .net 4 compiler to successfuly build this project)
+
